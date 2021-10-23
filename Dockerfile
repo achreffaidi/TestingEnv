@@ -1,6 +1,7 @@
 FROM maven:3.6.0-jdk-11-slim
 COPY src /home/app/src
 COPY pom.xml /home/app
-RUN mvn -f /home/app/pom.xml clean package
+COPY test.sh /home/app
+RUN chmod 777 /home/app/test.sh
 WORKDIR /home/app
-ENTRYPOINT ["mvn","test"]
+CMD ["./test.sh"]
